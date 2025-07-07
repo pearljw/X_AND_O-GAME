@@ -64,3 +64,62 @@ public class X_AND_O {
         welcome.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         welcome.setVisible(true);
     }
+
+    public void showIdScreen() {
+        idScreen = new JFrame("Player IDs");
+        idScreen.setSize(400, 300);
+        idScreen.setLayout(new GridLayout(4, 1));
+
+        JPanel p1Panel = new JPanel();
+        JLabel p1Label = new JLabel("Player 1 Name (X): ");
+        p1Label.setFont(new Font("Comic Sans MS", Font.BOLD, 16));
+        player1Field = new JTextField(8);
+        p1Panel.add(p1Label);
+        p1Panel.add(player1Field);
+        p1Panel.setBackground(new Color(255, 239, 213));
+
+        JPanel p2Panel = new JPanel();
+        JLabel p2Label = new JLabel("Player 2 Name (O): ");
+        p2Label.setFont(new Font("Comic Sans MS", Font.BOLD, 16));
+        player2Field = new JTextField(8);
+        p2Panel.add(p2Label);
+        p2Panel.add(player2Field);
+        p2Panel.setBackground(new Color(255, 239, 213));
+
+        JPanel btnPanel = new JPanel();
+        JButton goBtn = new JButton("Go!");
+        goBtn.setBackground(new Color(18, 186, 236));
+        goBtn.setForeground(Color.WHITE);
+        goBtn.setFont(new Font("Arial Black", Font.BOLD, 16));
+        JButton quitBtn = new JButton("Quit");
+        quitBtn.setBackground(new Color(241, 44, 11));
+        quitBtn.setForeground(Color.WHITE);
+        quitBtn.setFont(new Font("Arial Black", Font.BOLD, 16));
+        btnPanel.setBackground(new Color(255, 239, 213));
+        btnPanel.add(goBtn);
+        btnPanel.add(quitBtn);
+
+        idScreen.add(new JLabel(" Enter Names Below ", SwingConstants.CENTER));
+        idScreen.add(p1Panel);
+        idScreen.add(p2Panel);
+        idScreen.add(btnPanel);
+
+        goBtn.addActionListener(e -> {
+            String n1 = player1Field.getText().trim();
+            String n2 = player2Field.getText().trim();
+            if (!n1.equals("") && !n2.equals("")) {
+                player1Name = n1;
+                player2Name = n2;
+                idScreen.dispose();
+                showGame();
+            } else {
+                JOptionPane.showMessageDialog(idScreen, "Names required!");
+            }
+        });
+
+        quitBtn.addActionListener(e -> System.exit(0));
+
+        idScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        idScreen.getContentPane().setBackground(new Color(255, 239, 213));  // Light peachy background
+        idScreen.setVisible(true);
+    }
