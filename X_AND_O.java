@@ -123,3 +123,38 @@ public class X_AND_O {
         idScreen.getContentPane().setBackground(new Color(255, 239, 213));  // Light peachy background
         idScreen.setVisible(true);
     }
+
+public void showGame() {
+        gameWindow = new JFrame("Tic Tac Toe");
+        gameWindow.setSize(450, 500);
+        gameWindow.setLayout(new BorderLayout());
+
+        JPanel grid = new JPanel(new GridLayout(3,3,10,10));
+        Color[] tileColors = {
+                new Color(255,179,186), new Color(255,223,186), new Color(255,255,186),
+                new Color(186,255,201), new Color(186,225,255), new Color(255,186,250),
+                new Color(255,204,229), new Color(204,255,229), new Color(204,229,255)
+        };
+
+        for (int i=0; i<9; i++) {
+            JButton b = new JButton();
+            b.setFont(new Font("Comic Sans MS", Font.BOLD, 36));
+            b.setBackground(tileColors[i]);
+            int pos = i + 1;
+            b.addActionListener(e -> cellClicked(b, pos));
+            cells[i] = b;
+            grid.add(b);
+            b.setFocusPainted(false);
+        }
+
+        gameStatus = new JLabel("Turn: " + player1Name, SwingConstants.CENTER);
+        gameStatus.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+        gameStatus.setOpaque(true);
+        gameStatus.setBackground(Color.PINK);
+
+        gameWindow.add(gameStatus, BorderLayout.NORTH);
+        gameWindow.add(grid, BorderLayout.CENTER);
+
+        gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameWindow.setVisible(true);
+    }
