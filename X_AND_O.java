@@ -158,3 +158,47 @@ public void showGame() {
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameWindow.setVisible(true);
     }
+
+        public void cellClicked(JButton btn, int pos) {
+        if (!btn.getText().equals("")) return;
+
+        if (currentTurn == 0) {
+            btn.setText("X");
+            btn.setForeground(Color.RED);
+            p1Moves.add(pos);
+            gameStatus.setText("Turn: " + player2Name);
+            currentTurn = 1;
+        } else {
+            btn.setText("O");
+            btn.setForeground(Color.BLUE);
+            p2Moves.add(pos);
+            gameStatus.setText("Turn: " + player1Name);
+            currentTurn = 0;
+        }
+
+        checkWin();
+    }
+
+    public void checkWin() {
+        int[][] wins = {
+                {1,2,3}, {4,5,6}, {7,8,9},
+                {1,4,7}, {2,5,8}, {3,6,9},
+                {1,5,9}, {3,5,7}
+        };
+
+        for (int[] w : wins) {
+            if (p1Moves.contains(w[0]) && p1Moves.contains(w[1]) && p1Moves.contains(w[2])) {
+                showWin(player1Name + " Wins!");
+                return;
+            }
+            if (p2Moves.contains(w[0]) && p2Moves.contains(w[1]) && p2Moves.contains(w[2])) {
+                showWin(player2Name + " Wins!");
+                return;
+            }
+        }
+
+        if (p1Moves.size() + p2Moves.size() == 9) {
+            showWin("It's a Draw!");
+        }
+    }
+
